@@ -121,7 +121,10 @@ Object.assign(MediaElementPlayer.prototype, {
 					clicks = 0;
 					media.addEventListener('click', showUnlock)
 					t.options.clickToPlayPause = false;
-					t.disableControls();
+                    // Temp hack to work around disableControls error should use disableControls
+                    t.killControlsTimer();
+                    t.controlsEnabled = false;
+                    t.hideControls(false, true);
 					if (!t.options.autohideUnlock) {
 						t.unlockButton.style.display = '';
 					}
