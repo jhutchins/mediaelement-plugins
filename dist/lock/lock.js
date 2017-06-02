@@ -67,7 +67,6 @@ Object.assign(MediaElementPlayer.prototype, {
 
 		player.unlockButton.addEventListener('click', function () {
 			clicks += 1;
-			console.log('clicks =', clicks);
 			if (clicks >= t.options.unlockClicks) {
 				while (timeouts.length > 0) {
 					clearTimeout(timeouts.pop());
@@ -76,7 +75,6 @@ Object.assign(MediaElementPlayer.prototype, {
 			}
 			timeouts.push(setTimeout(function () {
 				clicks -= 1;
-				console.log('clicks =', clicks);
 				if (clicks === 0 && t.options.autohideUnlock) {
 					player.unlockButton.style.display = 'none';
 				}
@@ -122,14 +120,14 @@ Object.assign(MediaElementPlayer.prototype, {
 					clicks = 0;
 					media.addEventListener('click', showUnlock);
 					t.options.clickToPlayPause = false;
-					t.options.disableControls();
+					t.disableControls();
 					if (!t.options.autohideUnlock) {
 						t.unlockButton.style.display = '';
 					}
 				} else {
 					media.removeEventListener('click', showUnlock);
 					t.options.clickToPlayPause = true;
-					t.options.enableControls();
+					t.enableControls();
 					t.unlockButton.style.display = 'none';
 				}
 			}
